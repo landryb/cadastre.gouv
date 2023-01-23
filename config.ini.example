@@ -1,0 +1,8 @@
+[gdal]
+datasource = '/path/to/gpkg'
+layer = 'commune'
+insee = 'code_insee'
+geom = 'geometrie'
+
+[dgfip]
+apikey = XXXXXXXXXXXXXXXXXXX
