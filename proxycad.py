@@ -154,7 +154,12 @@ def main(u_path):
                 else:
                     out = Image.alpha_composite(out, im)
                 nb += 1
-            return send_file(im, mimetype=fmt)
+
+            img_io = BytesIO()
+            outmode = fmt.split('/')[1].upper()
+            out.save(img_io, outmode)
+            img_io.seek(0)
+            return send_file(img_io, mimetype=fmt)
 
     else:
         return report_exception("bbox, crs, width, height, layers & format parameters are mandatory for getmap")
