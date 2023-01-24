@@ -142,7 +142,7 @@ def main(u_path):
             app.logger.debug("{} => merging for {}".format(bbox, comms))
             nb = 0
             for comm in comms:
-                url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?{}".format(app.config.apikey, comm, request.query_string.decode('unicode_escape'))
+                url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?transparent=true&{}".format(app.config.apikey, comm, request.query_string.decode('unicode_escape'))
                 resp = get(url, args)
                 app.logger.debug("{} => {} (mimetype {})".format(url, resp.status_code, resp.mimetype))
                 if nb == 0:
