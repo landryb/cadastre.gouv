@@ -34,7 +34,7 @@ def get_layer():
         else:
             ds = gdal.OpenEx(app.config.datasource)
         if ds is not None:
-            g.layer = ds.getLayerByName(app.config.couche_commune)
+            g.layer = ds.GetLayerByName(app.config.couche_commune)
         if g.layer is None:
             pass
     return g.layer
