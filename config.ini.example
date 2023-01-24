@@ -1,5 +1,6 @@
 [gdal]
 datasource = /path/to/gpkg
+# has to be EPSG:2154
 layer = commune
 insee = code_insee
 geom = geometrie
