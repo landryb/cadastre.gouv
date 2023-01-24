@@ -35,6 +35,7 @@ def get_layer():
             ds = gdal.OpenEx(app.config.datasource)
         if ds is not None:
             g.layer = ds.GetLayerByName(app.config.couche_commune)
+            return ds
         if g.layer is None:
             pass
     return g.layer
@@ -51,9 +52,9 @@ def report_exception(message):
 def get_insee_for_bbox(xmin, ymin, xmax, ymax, epsg):
     layer = get_layer()
     comms = list()
-    layer.ExecuteSQL("SELECT {} FROM {} WHERE ST_Intersects({}, "
+    l = layer.ExecuteSQL("SELECT {} FROM {} WHERE ST_Intersects({}, "
         "ST_Transform(ST_MakeEnvelope({},{},{},{},{}), 2154)) LIMIT 10".format(app.config.champ_insee, app.config.couche_commune, app.config.champ_geom, xmin, ymin, xmax, ymax, epsg))
-    for feature in layer:
+    for feature in l:
 #    layer.SetSpatialFilter(ogr.CreateGeometryFromWkt(wkt))
          comms.append(feature.GetField(app.config.champ_insee))
 #    layer.ResetReading()
