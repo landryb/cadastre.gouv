@@ -148,14 +148,11 @@ def main(u_path):
                 if resp.status_code != 200:
                     continue
 
+                im = Image.open(BytesIO(resp.content))
                 if nb == 0:
-                    im = Image.open(BytesIO(resp.content))
-                    im.putalpha(0)
+                    out = im
                 else:
-                    frame = Image.open(StringIO(resp.content))
-                    frame.putalpha(0)
-                    im.paste(frame, (0, 0))
-                    frame.close()
+                    out = Image.alpha_composite(out, im)
                 nb += 1
             return send_file(im, mimetype=fmt)
 
