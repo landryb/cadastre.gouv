@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WMS_Capabilities xmlns:srv="http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd" xmlns:gmd="http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd"
+  xmlns:gco="http://schemas.opengis.net/iso/19139/20060504/gco/gco.xsd" xmlns:inspire_vs="http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
+  xmlns:gml="http://schemas.opengis.net/gml" xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0"
+  version="1.3.0" updateSequence="5" xmlns="http://www.opengis.net/wms" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd">
+  <Service>
+    <Name>WMS</Name>
+    <Title>Cadastre WMS</Title>
+    <Abstract>Service de mise à disposition des planches cadastrales vecteurs</Abstract>
+    <KeywordList>
+      <Keyword>cadastre</Keyword>
+      <Keyword>commune</Keyword>
+      <Keyword>parcelles</Keyword>
+      <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+      <Keyword vocabulary="ISO">INSPIRE:ViewService</Keyword>
+      <Keyword vocabulary="GEMET">Bâtiments</Keyword>
+      <Keyword vocabulary="GEMET">Parcelles cadastrales</Keyword>
+      <Keyword>WMS</Keyword>
+      <Keyword>voir</Keyword>
+      <Keyword>visualisation</Keyword>
+      <Keyword>plan</Keyword>
+    </KeywordList>
+    <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="{{ proto | default('http') }}://{{ host }}{{ reqpath }}?" />
+    <ContactInformation>
+      <ContactPersonPrimary>
+        <ContactPerson>bureau GF-3A</ContactPerson>
+        <ContactOrganization>DGFiP</ContactOrganization>
+      </ContactPersonPrimary>
+      <ContactPosition>PointOfContact</ContactPosition>
+      <ContactAddress>
+        <AddressType>postal</AddressType>
+        <Address>86, 92 allée de Bercy</Address>
+        <City>PARIS</City>
+        <StateOrProvince>ILE DE FRANCE</StateOrProvince>
+        <PostCode>75574</PostCode>
+        <Country>FRANCE</Country>
+      </ContactAddress>
+      <ContactVoiceTelephone></ContactVoiceTelephone>
+      <ContactFacsimileTelephone></ContactFacsimileTelephone>
+      <ContactElectronicMailAddress>bureau.gf3a-wms@dgfip.finances.gouv.fr</ContactElectronicMailAddress>
+    </ContactInformation>
+    <Fees>no conditions apply</Fees>
+    <AccessConstraints>Service Premium avec conditions d'utilisation et URL pour information</AccessConstraints>
+  </Service>
+  <Capability>
+    <Request>
+      <GetCapabilities>
+        <Format>text/xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xlink:type="simple" xlink:href="{{ proto | default('http') }}://{{ host }}{{ reqpath }}?" />
+            </Get>
+            <Post>
+              <OnlineResource xlink:type="simple" xlink:href="{{ proto | default('http') }}://{{ host }}{{ reqpath }}?" />
+            </Post>
+          </HTTP>
+        </DCPType>
+      </GetCapabilities>
+      <GetMap>
+        <Format>image/png</Format>
+        <Format>image/gif</Format>
+        <Format>image/jpeg</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xlink:type="simple" xlink:href="{{ proto | default('http') }}://{{ host }}{{ reqpath }}?" />
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetMap>
+      <GetFeatureInfo>	
+	    <Format>application/vnd.ogc.gml</Format>
+	    <Format>text/html</Format>
+		<DCPType>
+		  <HTTP>
+		    <Get>
+			  <OnlineResource xlink:type="simple" xlink:href="{{ proto | default('http') }}://{{ host }}{{ reqpath }}?" />
+			</Get>
+		  </HTTP>
+		</DCPType>
+	  </GetFeatureInfo>
+    </Request>
+    <Exception>
+      <Format>XML</Format>
+      <Format>INIMAGE</Format>
+      <Format>BLANK</Format>
+    </Exception>
+    <inspire_vs:ExtendedCapabilities>
+      <inspire_common:MetadataUrl xsi:type="inspire_common:resourceLocatorType">
+        <inspire_common:URL>http://www.geocatalogue.fr/api-public/improved/servicesRest?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;id=FR.DGFIP.CADASTRE.MD.WMS.63113&amp;outputSchema=http://www.isotc211.org/2005/gmd</inspire_common:URL>
+        <inspire_common:MediaType>application/vnd.iso.19139+xml</inspire_common:MediaType>
+      </inspire_common:MetadataUrl>
+      <inspire_common:SupportedLanguages xsi:type="inspire_common:supportedLanguagesType">
+        <inspire_common:DefaultLanguage>
+          <inspire_common:Language>fre</inspire_common:Language>
+        </inspire_common:DefaultLanguage>
+        <inspire_common:SupportedLanguage>
+          <inspire_common:Language>eng</inspire_common:Language>
+        </inspire_common:SupportedLanguage>
+        <inspire_common:SupportedLanguage>
+          <inspire_common:Language>spa</inspire_common:Language>
+        </inspire_common:SupportedLanguage>
+      </inspire_common:SupportedLanguages>
+      <inspire_common:ResponseLanguage>
+        <inspire_common:Language>fre</inspire_common:Language>
+      </inspire_common:ResponseLanguage>
+    </inspire_vs:ExtendedCapabilities>
+    <Layer>
+      <Title>Cadastre WMS - DGFIP</Title>
+      <Abstract>Service de mise à disposition des planches cadastrales vecteurs.</Abstract>
+      <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+        <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+        <southBoundLatitude>44.06737026158147</southBoundLatitude>
+        <northBoundLatitude>46.80422941973043</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <Style>
+        <Name>DEFAUT</Name>
+      </Style>
+      <MinScaleDenominator>99</MinScaleDenominator>
+      <Layer queryable="0" opaque="0">
+        <Name>AMORCES_CAD</Name>
+		<Title>Amorces cadastrales</Title>
+        <Abstract>Indique les amorces cadastrales.</Abstract>
+        <KeywordList>
+          <Keyword>Limite</Keyword>
+          <Keyword>Etat</Keyword>
+          <Keyword>Département</Keyword>
+          <Keyword>Commune</Keyword>
+          <Keyword>Section cadastrale</Keyword>
+          <Keyword>Subdivision de section</Keyword>
+          <Keyword>Feuille cadastrale</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <Style>
+          <Name>DEFAUT</Name>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>LIEUDIT</Name>
+        <Title>Lieu-dit</Title>
+        <Abstract>Indique les limites du lieu-dit.</Abstract>
+        <KeywordList>
+          <Keyword>Limite</Keyword>
+          <Keyword>Lieu-dit</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <Style>
+          <Name>DEFAUT</Name>
+        </Style>
+      </Layer>
+      <Layer queryable="1">
+        <Name>CP.CadastralParcel</Name>
+        <Title>Parcelle</Title>
+        <AuthorityURL name="FR.DGFIP.CADASTRE">
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://inspire.cadastre.gouv.fr"/>
+        </AuthorityURL>
+        <Identifier authority="FR.DGFIP.CADASTRE">MD.CP.84</Identifier>
+        <Abstract>Indique les limites de la parcelle.</Abstract>
+        <KeywordList>
+          <Keyword vocabulary="GEMET">Parcelles cadastrales</Keyword>
+          <Keyword>parcelle</Keyword>
+          <Keyword>parcellaire</Keyword>
+          <Keyword>plan</Keyword>
+          <Keyword>limite</Keyword>
+          <Keyword>contour</Keyword>
+          <Keyword>référence</Keyword>
+          <Keyword>cadastrale</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <Style>
+          <Name>DEFAUT</Name>
+          <Title>Style de représentation des parcelles cadastrales</Title>
+          <Abstract>Style permettant d'afficher les parcelles cadastrales selon la représentation par défaut du cadastre français</Abstract>
+          <LegendURL width="50" height="50">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple"
+            xlink:href="https://inspire.cadastre.gouv.fr/scpc/63113.wms?service=wms&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image/png&amp;layer=CP.CadastralParcel&amp;style="/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>CP.CadastralParcel.Default</Name>
+          <Title>Style de représentation des parcelles cadastrales conforme Inspire</Title>
+          <Abstract>Style permettant d'afficher les parcelles cadastrales selon les spécifications Inspire : les parcelles sont
+          représentées par un contour de couleur noire et de trait continu d'épaisseur 1 pixel pour une échelle d'affichage des
+          parcelles de 1:1 à 1:20 000. La police et la taille des numéros de parcelles sont Arial 10.</Abstract>
+          <LegendURL width="50" height="50">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple"
+            xlink:href="https://inspire.cadastre.gouv.fr/scpc/63113.wms?service=wms&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image/png&amp;layer=CP.CadastralParcel&amp;style=CP.CadastralParcel.Default"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>SUBFISCAL</Name>
+		<Title>Subdivision fiscale</Title>
+        <Abstract>Indique les limites de la subdivision fiscale.</Abstract>
+        <KeywordList>
+          <Keyword>Limite</Keyword>
+          <Keyword>Subdivision fiscale</Keyword>
+          <Keyword>Charge parcelle</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <Style>
+          <Name>DEFAUT</Name>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>CLOTURE</Name>
+        <Title>Clôture</Title>
+        <Abstract>Indique les emprises des clôtures comme par exemple des murs, fossés ou clôtures.
+        </Abstract>
+        <KeywordList>
+          <Keyword>Clôture</Keyword>
+          <Keyword>Mur mitoyen</Keyword>
+          <Keyword>Mur non mitoyen</Keyword>
+          <Keyword>Fossé mitoyen</Keyword>
+          <Keyword>Fossé non mitoyen</Keyword>
+          <Keyword>Clôture mitoyenne</Keyword>
+          <Keyword>Clôture non mitoyenne</Keyword>
+          <Keyword>Haie mitoyenne</Keyword>
+          <Keyword>Haie non mitoyenne</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <Style>
+          <Name>DEFAUT</Name>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>DETAIL_TOPO</Name>
+        <Title>Détails topographiques</Title>
+        <Abstract>Indique les éléments détaillés comme des ruisseaux, trottoirs, terrains de
+          sports, parkings, terrasses, pylônes, cimetières, et autres symboles etc.</Abstract>
+        <KeywordList>
+          <Keyword>Détails topographiques</Keyword>
+          <Keyword>Limite ne formant pas parcelle</Keyword>
+          <Keyword>Terrain de sports</Keyword>
+          <Keyword>Petit ruisseau</Keyword>
+          <Keyword>Trottoir</Keyword>
+          <Keyword>Parking</Keyword>
+          <Keyword>Terrasse</Keyword>
+          <Keyword>Pylône</Keyword>
+          <Keyword>Cimetière chrétien</Keyword>
+          <Keyword>Cimetière musulman</Keyword>
+          <Keyword>Cimetière israélite</Keyword>
+          <Keyword>Halte</Keyword>
+          <Keyword>Arrêt</Keyword>
+          <Keyword>Station</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <Style>
+          <Name>DEFAUT</Name>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>HYDRO</Name>
+        <Title>Eléments hydrographiques</Title>
+        <Abstract>Indique les éléments hydrographiques comme des puits, étangs, lacs, cours d'eau,
+          piscines.</Abstract>
+        <KeywordList>
+          <Keyword>Hydrographie</Keyword>
+          <Keyword>Puits</Keyword>
+          <Keyword>Etang</Keyword>
+          <Keyword>Lac</Keyword>
+          <Keyword>Cours d'eau</Keyword>
+          <Keyword>Piscine</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <Style>
+          <Name>DEFAUT</Name>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>VOIE_COMMUNICATION</Name>
+        <Title>Petites voies de communication</Title>
+        <Abstract>Indique les petites voies de communication comme des chemins, chaussées, sentiers ou des
+          réseaux de transports comme les chemins de fer, gazoduc, oléoduc, aqueduc, téléphérique,
+          ligne de transport de force, ponts, tunnels et axes de voie.</Abstract>
+        <KeywordList>
+          <Keyword>Voies de communication</Keyword>
+          <Keyword>Chemin</Keyword>
+          <Keyword>Chemin ne formant pas parcelle mitoyen</Keyword>
+          <Keyword>Chemin ne formant pas parcelle non mitoyen</Keyword>
+          <Keyword>Limite de chaussée avec trottoirs</Keyword>
+          <Keyword>Sentier</Keyword>
+          <Keyword>Réseaux de transport</Keyword>
+          <Keyword>Chemin de fer à une voie</Keyword>
+          <Keyword>Gazoduc</Keyword>
+          <Keyword>Oléoduc</Keyword>
+          <Keyword>Aqueduc</Keyword>
+          <Keyword>Téléphérique</Keyword>
+          <Keyword>Ligne de transport de force</Keyword>
+          <Keyword>Pont</Keyword>
+          <Keyword>Tunnel</Keyword>
+          <Keyword>Axe de voie</Keyword>
+          <Keyword>Numéro</Keyword>
+          <Keyword>Voie</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <Style>
+          <Name>DEFAUT</Name>
+        </Style>
+      </Layer>
+      <Layer queryable="1">
+        <Name>BU.Building</Name>
+        <Title>Bâtiments</Title>
+        <AuthorityURL name="FR.DGFIP.CADASTRE">
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://inspire.cadastre.gouv.fr"/>
+        </AuthorityURL>
+        <Identifier authority="FR.DGFIP.CADASTRE">MD.BU.63113</Identifier>
+        <Abstract>Indique les constructions de type bâtiment en dur (maison), bâtiment léger
+          (hangar), bâtiment en ruine, église, mosquée ou synagogue, etc.</Abstract>
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://www.geocatalogue.fr/api-public/improved/servicesRest?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;id=FR.DGFIP.CADASTRE.MD.BU.63113&amp;outputSchema=http://www.isotc211.org/2005/gmd"/>
+        </MetadataURL>
+        <KeywordList>
+          <Keyword vocabulary="GEMET">Bâtiments</Keyword>
+          <Keyword>construction</Keyword>
+          <Keyword>bâtiment</Keyword>
+          <Keyword>maison</Keyword>
+          <Keyword>immeuble</Keyword>
+          <Keyword>bâti</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <Style>
+          <Name>DEFAUT</Name>
+          <Title>Style de représentation des bâtiments</Title>
+          <Abstract>Style permettant d’afficher les bâtiments selon la représentation par défaut du cadatre français</Abstract>
+          <LegendURL width="50" height="50">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" 
+            xlink:href="https://inspire.cadastre.gouv.fr/scpc/63113.wms?service=wms&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image/png&amp;layer=BU.Building&amp;style="/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>BU.Building.Default</Name>
+          <Title>Style de représentation des bâtiments conforme Inspire</Title>
+          <Abstract>Style permettant d’afficher les bâtiments  selon les spécifications Inspire : les bâtiments sont représentés par un 
+          contour de couleur noire et un trait continu d’épaisseur 0,4, un remplissage continu de couleur gris pour une échelle d’affichage 
+          des bâtiments de 1:50 à 1:25 000. </Abstract>
+          <LegendURL width="50" height="50">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" 
+            xlink:href="https://inspire.cadastre.gouv.fr/scpc/63113.wms?service=wms&amp;version=1.3.0&amp;request=GetLegendGraphic&amp;format=image/png&amp;layer=BU.Building&amp;style=BU.Building.Default"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>BORNE_REPERE</Name>
+        <Title>Bornes et repères</Title>
+        <Abstract>Indique les bornes et repères du type points géodésiques, points de canevas et
+          points de polygonation, N.G.F repères de nivellement, bornes limites de communes et bornes de
+          propriété.</Abstract>
+        <KeywordList>
+          <Keyword>Bornes et repères</Keyword>
+          <Keyword>Point géodésique borné</Keyword>
+          <Keyword>Point géodésique non borné</Keyword>
+          <Keyword>Point de canevas d'ensemble borné</Keyword>
+          <Keyword>Point de canevas d'ensemble non borné</Keyword>
+          <Keyword>Point de polygonation repéré</Keyword>
+          <Keyword>Repère N.G.F.</Keyword>
+          <Keyword>Borne du N.G.F.</Keyword>
+          <Keyword>Nivellement M.R.L.</Keyword>
+          <Keyword>Autre repère de Nivellement</Keyword>
+          <Keyword>Borne limite de Commune</Keyword>
+          <Keyword>Croix gravée</Keyword>
+          <Keyword>Boulon scellé</Keyword>
+          <Keyword>Borne de propriété</Keyword>
+          <Keyword>Calvaire</Keyword>
+        </KeywordList>
+        <Style>
+          <Name>DEFAUT</Name>
+        </Style>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>2.0311740703775727</westBoundLongitude>
+          <eastBoundLongitude>7.287785618339615</eastBoundLongitude>
+          <southBoundLatitude>44.06737026158147</southBoundLatitude>
+          <northBoundLatitude>46.80422941973043</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+      </Layer>
+    </Layer>
+  </Capability>
+</WMS_Capabilities>
