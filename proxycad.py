@@ -159,8 +159,8 @@ def main(u_path):
             for comm in comms:
                 url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?transparent=true&{}".format(app.config.apikey, comm, request.query_string.decode('unicode_escape'))
                 resp = get(url, args)
-                app.logger.debug("{} => {} (mimetype {})".format(url, resp.status_code, resp.headers.get('content-type')))
                 if resp.status_code != 200:
+                    app.logger.error("{} => {} (mimetype {})".format(url, resp.status_code, resp.headers.get('content-type')))
                     continue
 
                 im = Image.open(BytesIO(resp.content))
