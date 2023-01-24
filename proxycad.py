@@ -29,11 +29,10 @@ def init_app(app):
 def get_layer():
     if "layer" not in g:
         gdal.UseExceptions()
-#        if app.config.datasource.startswith('PG:'):
-#            ds = gdal.OpenEx(app.config.datasource, allowed_drivers = ['PostgreSQL'])
-        ds = gdal.OpenEx(app.config.datasource, allowed_drivers = ['PostgreSQL'])
-#        else:
-#            ds = gdal.OpenEx(app.config.datasource)
+        if app.config.datasource.startswith("PG:"):
+            ds = gdal.OpenEx(app.config.datasource, allowed_drivers = ['PostgreSQL'])
+        else:
+            ds = gdal.OpenEx(app.config.datasource)
         if ds is not None:
             g.layer = ds.getLayerByName(app.config.couche_commune)
         if g.layer is None:
