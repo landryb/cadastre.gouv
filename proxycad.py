@@ -57,7 +57,7 @@ def get_insee_for_bbox(xmin, ymin, xmax, ymax, epsg):
         "ST_Transform(ST_MakeEnvelope({},{},{},{},{}), 2154)) LIMIT 10".format(app.config.champ_insee, app.config.couche_commune, app.config.champ_geom, xmin, ymin, xmax, ymax, epsg))
     for feature in layer:
 #    layer.SetSpatialFilter(ogr.CreateGeometryFromWkt(wkt))
-         comms.append(feature.GetField(champ_insee))
+         comms.append(feature.GetField(app.config.champ_insee))
 #    layer.ResetReading()
 #    layer.SetSpatialFilter(None)
     return comms
