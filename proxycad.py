@@ -10,7 +10,7 @@ from requests import get
 from flask import Flask, Response, render_template, request, g, send_file, redirect
 from io import BytesIO
 from PIL import Image
-from osgeo import gdal
+from osgeo import gdal, ogr, osr
 
 # read config file
 def init_app(app):
@@ -52,13 +52,27 @@ def report_exception(message):
 def get_insee_for_bbox(xmin, ymin, xmax, ymax, epsg):
     layer = get_layer()
     comms = list()
-    l = layer.ExecuteSQL("SELECT {} FROM {} WHERE ST_Intersects({}, "
-        "ST_Transform(ST_MakeEnvelope({},{},{},{},{}), 2154)) LIMIT 10".format(app.config.champ_insee, app.config.couche_commune, app.config.champ_geom, xmin, ymin, xmax, ymax, epsg))
-    for feature in l:
-#    layer.SetSpatialFilter(ogr.CreateGeometryFromWkt(wkt))
+    if epsg != '2154':
+        ring = ogr.Geometry(ogr.wkbLinearRing)
+        ring.AddPoint(float(xmax),float(ymin))
+        ring.AddPoint(float(xmax),float(ymax))
+        ring.AddPoint(float(xmin),float(ymax))
+        ring.AddPoint(float(xmin),float(ymin))
+        ring.AddPoint(float(xmax),float(ymin))
+        poly = ogr.Geometry(ogr.wkbPolygon)
+        poly.AddGeometry(ring)
+        s_srs = osr.SpatialReference()
+        s_srs.ImportFromEPSG(epsg)
+        t_srs = osr.SpatialReference()
+        t_srs.ImportFromEPSG(2154)
+        poly.Transform(osr.CoordinateTransformation(s_srs, t_srs))
+        layer.SetSpatialFilter(poly)
+    else:
+        layer.SetSpatialFilterRect(xmin, ymin, xmax, ymax)
+    for feature in layer:
          comms.append(feature.GetField(app.config.champ_insee))
-#    layer.ResetReading()
-#    layer.SetSpatialFilter(None)
+    layer.ResetReading()
+    layer.SetSpatialFilter(None)
     return comms
 
 @app.route("/", methods=["GET"], defaults={"u_path": ""})
