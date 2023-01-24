@@ -149,12 +149,12 @@ def main(u_path):
         comms = get_insee_for_bbox(sxmin, symin, sxmax, symax, epsg)
         # matche a single comm, return a 302 with the right url
         if len(comms) == 1:
-            app.logger.debug("{} => 302 w/ {}".format(bbox, comms[0]))
+            app.logger.debug("{} (EPSG:{}) => 302 w/ {}".format(bbox, epsg, comms[0]))
             url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?{}".format(app.config.apikey, comms[0], request.query_string.decode('unicode_escape'))
             return redirect(url, code=302)
         # do X queries
         else:
-            app.logger.debug("{} => merging for {}".format(bbox, comms))
+            app.logger.debug("{} (EPSG:{}) => merging for {}".format(bbox, epsg, comms))
             nb = 0
             for comm in comms:
                 url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?transparent=true&{}".format(app.config.apikey, comm, request.query_string.decode('unicode_escape'))
