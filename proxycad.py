@@ -24,7 +24,6 @@ def init_app(app):
         app.config.champ_geom = config['gdal'].get('geom')
     if 'dgfip' in config.sections():
         app.config.apikey = config['dgfip'].get('apikey')
-    app.logger.debug('ds={}'.format(app.config.datasource))
 
 # open gdal data source, return layer
 def get_layer():
