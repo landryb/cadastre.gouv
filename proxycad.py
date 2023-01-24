@@ -8,7 +8,7 @@ import configparser
 from requests.structures import CaseInsensitiveDict
 from requests import get
 from flask import Flask, Response, render_template, request, g, send_file, redirect
-from io import StringIO
+from io import BytesIO
 from PIL import Image
 from osgeo import gdal
 
@@ -149,7 +149,7 @@ def main(u_path):
                     continue
 
                 if nb == 0:
-                    im = Image.open(StringIO(resp.content))
+                    im = Image.open(BytesIO(resp.content))
                     im.putalpha(0)
                 else:
                     frame = Image.open(StringIO(resp.content))
