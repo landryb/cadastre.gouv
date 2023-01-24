@@ -166,6 +166,7 @@ def main(u_path):
         return report_exception("bbox, crs, width, height, layers & format parameters are mandatory for getmap")
 
 if __name__ == "__main__":
+    app.logger.setLevel(logging.DEBUG)
     app.run(debug=True)
 else:
     gunicorn_logger = logging.getLogger("gunicorn.error")
