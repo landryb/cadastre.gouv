@@ -36,7 +36,8 @@ def get_layer():
         if g.ds is not None:
             g.layer = g.ds.GetLayerByName(app.config.couche_commune)
         if g.layer is None:
-            pass
+            app.logger.error("{} not found in {}".format(app.config.couche_commune, app.config.datasource))
+            quit()
     return g.layer
 
 maxscale = 25000
