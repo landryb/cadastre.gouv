@@ -137,14 +137,14 @@ def main(u_path):
         # matche a single comm, return a 302 with the right url
         if len(comms) == 1:
             app.logger.debug("{} => 302 w/ {}".format(bbox, comms[0]))
-            url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?".format(app.config.apikey, comms[0])
+            url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?{}".format(app.config.apikey, comms[0], request.query_string.decode('unicode_escape'))
             return redirect(url, code=302)
         # do X queries
         else:
             app.logger.debug("{} => merging for {}".format(bbox, comms))
             nb = 0
             for comm in comms:
-                url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?".format(app.config.apikey, comm)
+                url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?{}".format(app.config.apikey, comm, request.query_string.decode('unicode_escape'))
                 resp = get(url, args)
                 app.logger.debug("{} => {} (mimetype {})".format(url, resp.status_code, resp.mimetype))
                 if nb == 0:
