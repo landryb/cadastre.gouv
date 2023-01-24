@@ -7,7 +7,7 @@ import os
 import configparser
 from requests.structures import CaseInsensitiveDict
 from requests import get
-from flask import Flask, render_template, request, g, send_file, redirect
+from flask import Flask, Response, render_template, request, g, send_file, redirect
 from io import StringIO
 from PIL import Image
 from osgeo import gdal
@@ -88,12 +88,12 @@ def main(u_path):
         )
 
     if query == "getcapabilities":
-        return render_template(
+        return Response(render_template(
             "getcap.xml.j2",
             proto=request.headers.get("X-Forwarded-Proto", "http"),
             host=request.headers.get("X-Forwarded-Host", "localhost"),
             reqpath=request.path,
-        )
+        ), mimetype='text/xml')
     if query == "getfeatureinfo":
         # todo
         pass
