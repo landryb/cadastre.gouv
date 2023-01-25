@@ -5,6 +5,7 @@
 import logging
 import os
 import configparser
+import xml.etree.ElementTree as ET
 from requests.structures import CaseInsensitiveDict
 from requests import get
 from flask import Flask, Response, render_template, request, g, send_file, redirect
@@ -122,9 +123,6 @@ def main(u_path):
             llbbox = app.config.llbbox,
             reqpath=request.path,
         ), mimetype='text/xml')
-    if query == "getfeatureinfo":
-        # todo
-        pass
 
     # now service is getmap, check all mandatory params
     if all(key in args for key in ("bbox", "crs", "width", "height", "layers", "format")):
@@ -177,14 +175,28 @@ def main(u_path):
                 if resp.status_code != 200:
                     app.logger.error("{} => {} (mimetype {})".format(url, resp.status_code, resp.headers.get('content-type')))
                     continue
-
-                im = Image.open(BytesIO(resp.content))
-                if nb == 0:
-                    out = im
+                if query == "getfeatureinfo":
+                    if args.get("info_format") == "application/vnd.ogc.gml":
+                        root = ET.fromstring(resp.content)
+                        for child in root:
+                            # XX returns the first comm that gives a feature
+                            if child.tag.endswith('member'):
+                                return Response(resp.content, mimetype=resp.headers.get('content-type'))
+                    # text/html
+                    else:
+                        # XX returns the first comm that gives a feature in the HTML (eg non-empty table)
+                        if b"inspireId" in resp.content:
+                            return Response(resp.content, mimetype=resp.headers.get('content-type'))
                 else:
-                    out = Image.alpha_composite(out, im)
-                nb += 1
-
+                    im = Image.open(BytesIO(resp.content))
+                    if nb == 0:
+                        out = im
+                    else:
+                        out = Image.alpha_composite(out, im)
+                    nb += 1
+            # if we're here, none of the GFI returned a feature - return the last resp ?
+            if query == "getfeatureinfo":
+                return Response(resp.content, mimetype=resp.headers.get('content-type'))
             img_io = BytesIO()
             outmode = fmt.split('/')[1].upper()
             out.save(img_io, outmode)
