@@ -118,6 +118,8 @@ def main(u_path):
             "getcap.xml.j2",
             proto=request.headers.get("X-Forwarded-Proto", "http"),
             host=request.headers.get("X-Forwarded-Host", "localhost"),
+            l93bbox = app.config.l93bbox,
+            llbbox = app.config.llbbox,
             reqpath=request.path,
         ), mimetype='text/xml')
     if query == "getfeatureinfo":
