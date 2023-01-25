@@ -38,6 +38,18 @@ def get_layer():
         if g.layer is None:
             app.logger.error("{} not found in {}".format(app.config.couche_commune, app.config.datasource))
             quit()
+        # compute layer bbox so that we know the service extent for getcapabilities
+        l93ext = g.layer.GetExtent()
+        app.config.l93bbox = l93ext
+        # reproject to WGS84
+        s_srs = osr.SpatialReference()
+        s_srs.ImportFromEPSG(2154)
+        t_srs = osr.SpatialReference()
+        t_srs.ImportFromEPSG(4326)
+        t = osr.CoordinateTransformation(s_srs, t_srs)
+        bl = t.TransformPoint(l93ext[0], l93ext[2])
+        ur = t.TransformPoint(l93ext[1], l93ext[3])
+        app.config.llbbox = (bl[0], bl[1], ur[0], ur[1])
     return g.layer
 
 maxscale = 25000
