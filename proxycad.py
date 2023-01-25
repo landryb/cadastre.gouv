@@ -138,7 +138,7 @@ def main(u_path):
                 epsg = int(x)
         # validate format
         fmt = args.get("format", "").lower()
-        if fmt not in ('image/png', 'image/jpeg', 'image/gif'):
+        if fmt not in ('image/png'):
             return report_exception("Format d'image non pris en compte: {}".format(fmt))
 
         # validate height/width
