@@ -113,6 +113,7 @@ def main(u_path):
         )
 
     if query == "getcapabilities":
+        get_layer()
         return Response(render_template(
             "getcap.xml.j2",
             proto=request.headers.get("X-Forwarded-Proto", "http"),
