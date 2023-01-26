@@ -10,7 +10,7 @@ from requests.structures import CaseInsensitiveDict
 from requests import get
 from flask import Flask, Response, render_template, request, g, send_file, redirect
 from io import BytesIO
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from osgeo import gdal, ogr, osr
 
 # read config file
@@ -56,6 +56,22 @@ def get_layer():
 maxscale = 25000
 app = Flask(__name__, template_folder=".")
 init_app(app)
+
+def empty_image(height, width, fmt, message=None):
+    canvas = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    if message and height > 300 and width > 300:
+        font = ImageFont.truetype("DejaVuSansMono.ttf", 10)
+        img_draw = ImageDraw.Draw(canvas)
+        box = img_draw.multiline_textsize(message, font=font)
+        # calculate position
+        x = (width - box[0]) // 2
+        y = (height - box[1]) // 2
+        img_draw.multiline_text((x, y), message, fill="red", font=font)
+    img_io = BytesIO()
+    canvas.save(img_io, fmt.split('/')[1].upper())
+    img_io.seek(0)
+    return send_file(img_io, mimetype=fmt)
+
 
 def report_exception(message):
     app.logger.error("{}".format(message))
