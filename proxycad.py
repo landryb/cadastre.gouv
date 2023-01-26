@@ -189,6 +189,8 @@ def main(u_path):
         else:
             app.logger.debug("{} {} (EPSG:{}) => merging for {}".format(query, bbox, epsg, comms))
             nb = 0
+            # start with an empty transparent image, in case all queries fail..
+            out = Image.new("RGBA", (width, height), (0, 0, 0, 0))
             for comm in comms:
                 url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?transparent=true&{}".format(app.config.apikey, comm, request.query_string.decode('unicode_escape'))
                 resp = get(url, args)
