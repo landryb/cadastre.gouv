@@ -162,6 +162,8 @@ def main(u_path):
             return report_exception("height and width should be numeric values")
         height = int(height)
         width = int(width)
+        if width > 1280:
+            return empty_image(height, width, fmt, "le service de la DGFiP ne supporte pas les images de plus de 1280px de large")
 
         # validate that bbox only has 4 values
         bbox = args.get("bbox")
