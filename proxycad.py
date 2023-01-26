@@ -22,7 +22,6 @@ def init_app(app):
         app.config.datasource = config['gdal'].get('datasource')
         app.config.couche_commune = config['gdal'].get('layer')
         app.config.champ_insee = config['gdal'].get('insee')
-        app.config.champ_geom = config['gdal'].get('geom')
     if 'dgfip' in config.sections():
         app.config.apikey = config['dgfip'].get('apikey')
 
