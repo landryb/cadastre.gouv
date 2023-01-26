@@ -121,6 +121,52 @@
         <Name>DEFAUT</Name>
       </Style>
       <MinScaleDenominator>99</MinScaleDenominator>
+       <Layer queryable="1" opaque="0">
+       <Name>AMORCES_CAD,CP.CadastralParcel,HYDRO,BU.Building</Name>
+         <Title>Cadastre complet</Title>
+         <Abstract>Affiche les couches sections/parcelles/batiments du service WMS cadastre.gouv.fr</Abstract>
+         <KeywordList>
+          <Keyword>Limite</Keyword>
+          <Keyword>Etat</Keyword>
+          <Keyword>Département</Keyword>
+          <Keyword>Commune</Keyword>
+          <Keyword>Section cadastrale</Keyword>
+          <Keyword>Subdivision de section</Keyword>
+          <Keyword>Feuille cadastrale</Keyword>
+          <Keyword vocabulary="GEMET">Parcelles cadastrales</Keyword>
+          <Keyword>parcelle</Keyword>
+          <Keyword>parcellaire</Keyword>
+          <Keyword>plan</Keyword>
+          <Keyword>limite</Keyword>
+          <Keyword>contour</Keyword>
+          <Keyword>référence</Keyword>
+          <Keyword>cadastrale</Keyword>
+          <Keyword>Hydrographie</Keyword>
+          <Keyword>Puits</Keyword>
+          <Keyword>Etang</Keyword>
+          <Keyword>Lac</Keyword>
+          <Keyword>Cours d'eau</Keyword>
+          <Keyword>Piscine</Keyword>
+          <Keyword vocabulary="GEMET">Bâtiments</Keyword>
+          <Keyword>construction</Keyword>
+          <Keyword>bâtiment</Keyword>
+          <Keyword>maison</Keyword>
+          <Keyword>immeuble</Keyword>
+          <Keyword>bâti</Keyword>
+        </KeywordList>
+        <CRS>EPSG:2154</CRS><CRS>EPSG:3942</CRS><CRS>EPSG:3943</CRS><CRS>EPSG:3944</CRS><CRS>EPSG:3945</CRS><CRS>EPSG:3946</CRS><CRS>EPSG:3947</CRS><CRS>EPSG:3948</CRS><CRS>EPSG:3949</CRS><CRS>EPSG:3950</CRS><CRS>EPSG:32630</CRS><CRS>EPSG:32631</CRS><CRS>EPSG:32632</CRS><CRS>EPSG:3857</CRS><CRS>EPSG:4326</CRS><CRS>EPSG:4258</CRS><CRS>EPSG:32620</CRS><CRS>EPSG:2969</CRS><CRS>EPSG:2970</CRS><CRS>EPSG:2973</CRS><CRS>EPSG:32622</CRS><CRS>EPSG:2972</CRS><CRS>EPSG:32740</CRS><CRS>EPSG:2975</CRS><CRS>EPSG:32738</CRS><CRS>EPSG:4471</CRS><CRS>EPSG:32621</CRS>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>{{ llbbox[1] }}</westBoundLongitude>
+          <eastBoundLongitude>{{ llbbox[3] }}</eastBoundLongitude>
+          <southBoundLatitude>{{ llbbox[0] }}</southBoundLatitude>
+          <northBoundLatitude>{{ llbbox[2] }}</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:2154" minx="{{ l93bbox[0] }}" miny="{{ l93bbox[2] }}" maxx="{{ l93bbox[1] }}" maxy="{{ l93bbox[3] }}"/>
+        <Style>
+          <Name>DEFAUT</Name>
+        </Style>
+        <MaxScaleDenominator>26000</MaxScaleDenominator>
+      </Layer>
       <Layer queryable="0" opaque="0">
         <Name>AMORCES_CAD</Name>
 		<Title>Amorces cadastrales (&lt;= 1:26000)</Title>
