@@ -53,7 +53,6 @@ def get_layer():
         app.config.llbbox = (bl[0], bl[1], ur[0], ur[1])
     return g.layer
 
-maxscale = 25000
 app = Flask(__name__, template_folder=".")
 init_app(app)
 
@@ -174,8 +173,11 @@ def main(u_path):
 #            return report_exception("bbox should look like xmin,ymin,xmax,ymax with only numeric values")
         # validate scale
         scale = (float(sxmax) - float(sxmin))/(width * 0.00028)
-        if scale > maxscale:
-            return report_exception("echelle non autorisée ({} > {})".format(scale, maxscale))
+        if ((scale > 10000 and args.get("layers") == 'CP.CadastralParcel')
+            or (scale > 10000 and args.get("layers") == 'BU.Building')
+            or scale > 26000):
+            # return empty transparent image
+            return empty_image(height, width, fmt)
 
         comms = get_insee_for_bbox(sxmin, symin, sxmax, symax, epsg)
         # matche a single comm, return a 302 with the right url
