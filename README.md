@@ -12,9 +12,7 @@ Ce proxy est très fortement inspiré par https://github.com/spelhate/proxycad, 
 
 ## Prérequis
 Disposer d'une couche spatiale des communes de la zone souhaitée (une région,
-la france..) disposant à minima des champs suivants:
-- code INSEE
-- géométrie
+la france..) disposant à minima d'un champ avec le code INSEE.
 
 la couche ADMINEXPRESS COG CARTO (https://geoservices.ign.fr/adminexpress) est
 un bon exemple, mais on peut aussi utiliser les communes d'openstreetmap comme
@@ -32,7 +30,7 @@ le fait par défaut https://github.com/spelhate/proxycad
 - Les urls/emprises sont calculées automatiquement depuis l'environnement/couche support
 
 ## Déploiement
-- installer les librairies python flask, request et PIL/pillow. (debian: `python3-flask`, `python3-requests`, `python3-pil`)
+- installer les librairies python gdal, flask, request et PIL/pillow. (debian: `python3-gdal`, `python3-flask`, `python3-requests`, `python3-pil`)
 - installer un middleware WSGI comme gunicorn, une fois cloné ce repository dans `/srv/cadastre.gouv` cette configuration pour supervisord
   (a mettre dans `/etc/supervisord/conf.d/proxycad.conf`) fonctionne:
 ```
