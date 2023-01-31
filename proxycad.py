@@ -16,7 +16,11 @@ from osgeo import gdal, ogr, osr
 # read config file
 def init_app(app):
     config = configparser.ConfigParser()
-    config.read("config.ini")
+    if os.access("config.ini", os.R_OK):
+      config.read("config.ini")
+    else:
+        app.logger.error("cant read config file")
+        quit()
     app.logger.debug(config)
     if "gdal" in config.sections():
         app.config.datasource = config["gdal"].get("datasource")
