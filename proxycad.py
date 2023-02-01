@@ -152,11 +152,17 @@ def main(u_path):
 
     # now service is getmap, check all mandatory params
     if all(
-        key in args for key in ("bbox", "crs", "width", "height", "layers", "format")
+        key in args for key in ("bbox", "width", "height", "layers", "format")
     ):
 
         # validate crs
         crs = args.get("crs")
+        if not crs:
+            crs = args.get("srs")
+        if not crs:
+            return report_exception(
+                "bbox, srs/crs, width, height, layers & format parameters are mandatory for getmap"
+            )
         epsg = 2154
         if ":" in crs:
             x = crs.split(":")[1]
