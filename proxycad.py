@@ -17,7 +17,7 @@ from osgeo import gdal, ogr, osr
 def init_app(app):
     config = configparser.ConfigParser()
     if os.access("config.ini", os.R_OK):
-      config.read("config.ini")
+        config.read("config.ini")
     else:
         app.logger.error("cant read config file")
         quit()
@@ -151,9 +151,7 @@ def main(u_path):
         )
 
     # now service is getmap, check all mandatory params
-    if all(
-        key in args for key in ("bbox", "width", "height", "layers")
-    ):
+    if all(key in args for key in ("bbox", "width", "height", "layers")):
 
         # validate crs
         crs = args.get("crs")
@@ -210,10 +208,10 @@ def main(u_path):
         # rewrite WMS 1.1.1 GFI requests done by mapstore to WMS 1.3.0
         qstr = request.query_string.decode("unicode_escape")
         if query == "getfeatureinfo" and args.get("version") != "1.3.0":
-            qstr = qstr.replace("version=1.1.1","version=1.3.0")
-            qstr = qstr.replace("&srs=","&crs=")
-            qstr = qstr.replace("&x=","&i=")
-            qstr = qstr.replace("&y=","&j=")
+            qstr = qstr.replace("version=1.1.1", "version=1.3.0")
+            qstr = qstr.replace("&srs=", "&crs=")
+            qstr = qstr.replace("&x=", "&i=")
+            qstr = qstr.replace("&y=", "&j=")
             # append mandatory args
             qstr = qstr + "&format=image/png&styles="
 
