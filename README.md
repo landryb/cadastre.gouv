@@ -51,4 +51,4 @@ location /cadastre.gouv {
 
 ## Utilisation
 
-Exemple d'utilisation : (http://geobretagne.fr/mapfishapp/map/b391ec0966a3ff4da4c78bcfbc5688bf)
+Exemple d'utilisation : (https://ids.craig.fr/mapstore/#/context/cadastregouv)
