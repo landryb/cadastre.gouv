@@ -152,7 +152,7 @@ def main(u_path):
 
     # now service is getmap, check all mandatory params
     if all(
-        key in args for key in ("bbox", "width", "height", "layers", "format")
+        key in args for key in ("bbox", "width", "height", "layers")
     ):
 
         # validate crs
@@ -170,7 +170,7 @@ def main(u_path):
                 epsg = int(x)
         # validate format
         fmt = args.get("format", "").lower()
-        if fmt not in ("image/png"):
+        if fmt not in ("image/png") and query == "getmap":
             return report_exception("Format d'image non pris en compte: {}".format(fmt))
 
         # validate height/width
