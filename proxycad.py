@@ -207,6 +207,16 @@ def main(u_path):
             # return empty transparent image
             return empty_image(height, width, fmt)
 
+        # rewrite WMS 1.1.1 GFI requests done by mapstore to WMS 1.3.0
+        qstr = request.query_string.decode("unicode_escape")
+        if query == "getfeatureinfo" and args.get("version") != "1.3.0":
+            qstr = qstr.replace("version=1.1.1","version=1.3.0")
+            qstr = qstr.replace("&srs=","&crs=")
+            qstr = qstr.replace("&x=","&i=")
+            qstr = qstr.replace("&y=","&j=")
+            # append mandatory args
+            qstr = qstr + "&format=image/png&styles="
+
         comms = get_insee_for_bbox(sxmin, symin, sxmax, symax, epsg)
         # matche a single comm, return a 302 with the right url
         if len(comms) == 1:
@@ -216,7 +226,7 @@ def main(u_path):
             url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?{}".format(
                 app.config.apikey,
                 comms[0],
-                request.query_string.decode("unicode_escape"),
+                qstr,
             )
             return redirect(url, code=302)
         # do X queries
@@ -231,7 +241,7 @@ def main(u_path):
                 url = "https://inspire.cadastre.gouv.fr/scpc/{}/{}.wms?transparent=true&{}".format(
                     app.config.apikey,
                     comm,
-                    request.query_string.decode("unicode_escape"),
+                    qstr,
                 )
                 resp = get(url, args)
                 if resp.status_code != 200:
