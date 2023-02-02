@@ -1,0 +1,4 @@
+GDAL
+pillow
+Flask
+requests
