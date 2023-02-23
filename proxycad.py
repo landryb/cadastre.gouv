@@ -5,6 +5,7 @@
 import logging
 import os
 import configparser
+import re
 import xml.etree.ElementTree as ET
 from requests.structures import CaseInsensitiveDict
 from requests import get
@@ -214,6 +215,25 @@ def main(u_path):
             qstr = qstr.replace("&y=", "&j=")
             # append mandatory args
             qstr = qstr + "&format=image/png&styles="
+
+        # handle GFI on multiple layers/non-queryable layers -> query
+        # CP.CadastralParcel by default unless BU.Building is listed
+        if query == "getfeatureinfo" and args.get("query_layers") not in (
+            "CP.CadastralParcel",
+            "BU.Building",
+        ):
+            qlpat = re.compile("&query_layers=[^&]*", re.IGNORECASE)
+            lpat = re.compile("&layers=[^&]*", re.IGNORECASE)
+            ql = args.get("query_layers")
+            if "CP.CadastralParcel" in ql or "BU.Building" not in ql:
+                qstr = lpat.sub(
+                    "&LAYERS=CP.CadastralParcel",
+                    qlpat.sub("&QUERY_LAYERS=CP.CadastralParcel", qstr),
+                )
+            else:
+                qstr = lpat.sub(
+                    "&LAYERS=BU.Building", qlpat.sub("&QUERY_LAYERS=BU.Building", qstr)
+                )
 
         comms = get_insee_for_bbox(sxmin, symin, sxmax, symax, epsg)
         # matche a single comm, return a 302 with the right url
