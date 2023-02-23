@@ -261,7 +261,11 @@ def main(u_path):
                     comm,
                     qstr,
                 )
-                resp = get(url, args)
+                try:
+                    resp = get(url, args)
+                except requests.exceptions.RequestException as e:
+                    app.logger.error(e)
+                    continue
                 if resp.status_code != 200 and resp.status_code != 503:
                     app.logger.error(
                         "{} => {} (mimetype {})".format(
