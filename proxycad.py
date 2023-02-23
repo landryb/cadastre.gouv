@@ -216,6 +216,18 @@ def main(u_path):
             # append mandatory args
             qstr = qstr + "&format=image/png&styles="
 
+        # rescale height/width for gfi on large images ? edge case...
+        if query == "getfeatureinfo" and width > 1280:
+            qstr = qstr.replace("WIDTH={}".format(width), "WIDTH=1280")
+            nh = int(height * 1280 / width)
+            qstr = qstr.replace("HEIGHT={}".format(height), "HEIGHT={}".format(nh))
+            ii = int(args.get("I", 0))
+            nii = int(ii * 1280 / width)
+            ij = int(args.get("J", 0))
+            nij = int(ij * nh / height)
+            qstr = qstr.replace("I={}".format(ii), "I={}".format(nii))
+            qstr = qstr.replace("J={}".format(ij), "J={}".format(nij))
+
         # handle GFI on multiple layers/non-queryable layers -> query
         # CP.CadastralParcel by default unless BU.Building is listed
         if query == "getfeatureinfo" and args.get("query_layers") not in (
