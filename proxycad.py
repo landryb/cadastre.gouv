@@ -179,7 +179,7 @@ def main(u_path):
             return report_exception("height and width should be numeric values")
         height = int(height)
         width = int(width)
-        if width > 1280:
+        if query == "getmap" and width > 1280:
             return empty_image(
                 height,
                 width,
