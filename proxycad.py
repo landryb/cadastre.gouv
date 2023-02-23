@@ -262,7 +262,7 @@ def main(u_path):
                     qstr,
                 )
                 resp = get(url, args)
-                if resp.status_code != 200:
+                if resp.status_code != 200 and resp.status_code != 503:
                     app.logger.error(
                         "{} => {} (mimetype {})".format(
                             url, resp.status_code, resp.headers.get("content-type")
