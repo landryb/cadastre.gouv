@@ -72,10 +72,10 @@ def empty_image(height, width, fmt, message=None):
     if message and height > 300 and width > 300:
         font = ImageFont.truetype("DejaVuSansMono.ttf", 10)
         img_draw = ImageDraw.Draw(canvas)
-        box = img_draw.multiline_textsize(message, font=font)
+        left, top, right, bottom = img_draw.multiline_textbbox((0, 0), message, font=font)
         # calculate position
-        x = (width - box[0]) // 2
-        y = (height - box[1]) // 2
+        x = (width - (right - left)) // 2
+        y = (height - (top - bottom)) // 2
         img_draw.multiline_text((x, y), message, fill="red", font=font)
     img_io = BytesIO()
     canvas.save(img_io, fmt.split("/")[1].upper())
